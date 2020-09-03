@@ -1,12 +1,27 @@
 
-.Board {
-  display: flex;
-  flex-wrap: wrap;
+.squareBlack {
+  background-color: #4e5a84;
   width: 100%;
   height: 100%;
 
-  .square {
-    width: 12.5%;
-    height: 12.5%;
+}
+
+.squareWhite {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+}
+
+.pieceContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  & img {
+    cursor: grab;
+    max-width: 70%;
+    max-height: 70%;
+
   }
 }

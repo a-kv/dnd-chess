@@ -1,18 +1,16 @@
 @import "nullstyle";
 
-.App {
+.app {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
 
-}
-
-@media screen and (max-width: 640px) {
-  .App {
-    flex-direction: column;
+  .boardContainer {
+    width: 600px;
+    height: 600px;
   }
 }
+
 

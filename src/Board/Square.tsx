@@ -1,13 +1,18 @@
 import React from 'react';
-import './../scss/board.scss'
+import './../scss/square.scss'
 
 type propsType = {
-    piece: number
+    children: any
+    black: boolean
 }
 
-export const BoardSquare = ({piece}: propsType) => {
+export const Square = ({children, black}: propsType) => {
+
+    const bsClass = black ? 'squareBlack' : 'squareWhite'
+
     return (
-        <div className="Board">
+        <div className={bsClass}>
+            {children}
         </div>
     );
 }

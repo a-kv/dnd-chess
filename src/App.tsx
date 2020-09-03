@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import {gameSbj, initGame} from './Game/Game'
+import {Board} from "./Board/Board";
+import './scss/index.scss'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export const App = () => {
+    const [board, setBoard] = useState([])
+    const [isGameOver, setIsGameOver] = useState()
+    const [result, setResult] = useState()
+    useEffect(() => {
+        initGame()
+        const subscribe = gameSbj.subscribe((game: any) => {
+            setBoard(game.board)
+            setIsGameOver(game.isGameOver)
+            setResult(game.result)
+        })
+        return () => subscribe.unsubscribe()
+    }, [])
+
+    return (
+        <div className="app">
+            {isGameOver && (
+                <h2>GAME OVER
+                    <button>
+
+                    </button>
+
+                </h2>
+            )}
+            <div className='boardContainer'><Board board={board}/></div>
+        </div>
+    );
 }
 
-export default App;
