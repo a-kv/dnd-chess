@@ -30,7 +30,7 @@ export const BoardSquare = ({piece, black, position}: propsType) => {
             pendingPromotion && pendingPromotion.to === position ? setPromotion(pendingPromotion) : setPromotion(null)
         })
         return () => subscribe.unsubscribe()
-    }, [])
+    }, [position])
     return (
         <div className="board" ref={drop}>
             <Square black={black}>

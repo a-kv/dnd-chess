@@ -8,14 +8,14 @@
   .square {
     width: 12.5%;
     height: 12.5%;
-
-    //padding-bottom: 12.5% * 100 / 12.5% ;
   }
+
   .promoteSquare {
     width: 50%;
     height: 50%;
-    .pieceContainer{
-      & img{
+
+    .pieceContainer {
+      & img {
         cursor: grab;
       }
     }

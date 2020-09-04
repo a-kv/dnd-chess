@@ -1,15 +1,15 @@
-
+$a: 100%;
 .squareBlack {
   background-color: #4e5a84;
-  width: 100%;
-  height: 100%;
+  width: $a;
+  height: $a;
 
 }
 
 .squareWhite {
   background-color: white;
-  width: 100%;
-  height: 100%;
+  width: $a;
+  height: $a;
 }
 
 .pieceContainer {
@@ -18,6 +18,7 @@
   justify-content: center;
   width: 100%;
   height: 100%;
+
   & img {
     cursor: grab;
     max-width: 70%;

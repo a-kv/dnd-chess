@@ -1,20 +1,23 @@
 import * as Chess from 'chess.js'
 import {BehaviorSubject} from 'rxjs'
 
-let promotion = 'rnb2bnr/pppPkppp/8/4p3/7q/8/PPPP1PPP/RNBQKBNR w KQ - 1 5'
-let staleMate = '4k3/4P3/4K3/8/8/8/8/8 b -- 0 78'
-let checkMate = 'rnb1kbnr/pppp1ppp/8/4p3/5PPq/8/PPPPP2P/RNBQKBNR w KQkq - 1 3'
-let insuficcientMaterial = 'k7/8/n7/8/8/8/8/7K b - - 0 1'
 // @ts-ignore
-const chess = new Chess(staleMate);
+const chess = new Chess();
 
-export const gameSbj = new BehaviorSubject({
-    board: chess.board()
-})
+export const gameSbj = new BehaviorSubject({})
 
 export const initGame = () => {
+    const savedGame = localStorage.getItem('savedGame')
+    if (savedGame) {
+        chess.load(savedGame)
+    }
     updateGame()
 }
+export const resetGame = () => {
+    chess.reset()
+    updateGame()
+}
+
 export const handleMove = (from: string, to: string) => {
     const promotions = chess.moves({verbose: true}).filter((m: any) => m.promotion)
     console.table(promotions)
@@ -46,9 +49,10 @@ export const updateGame = (pendingPromotion?: any) => {
         board: chess.board(),
         pendingPromotion,
         isGameOver,
+        turn: chess.turn(),
         result: isGameOver ? getGameResult() : null
     }
-
+    localStorage.setItem('savedGame', chess.fen())
     gameSbj.next(newGame)
 }
 
@@ -62,10 +66,10 @@ export const getGameResult = () => {
             reason = 'STALEMATE'
         } else if (chess.in_threefold_repetition()) {
             reason = 'REPETITION'
-        }else if (chess.insufficient_material()) {
+        } else if (chess.insufficient_material()) {
             reason = 'INSUFFICIENT MATERIAL'
         }
-        return  `DRAW - ${reason}`
+        return `DRAW - ${reason}`
     } else {
         return `UNKNOWN REASON`
     }

@@ -10,6 +10,22 @@
   .boardContainer {
     width: 600px;
     height: 600px;
+
+    .verticalText {
+      text-orientation: upright;
+      writing-mode: vertical-lr;
+      font-family: sans-serif;
+      padding: 10px;
+      color: white;
+
+      & button {
+        margin-top: 20px;
+        cursor: pointer;
+        background-color: #44444e;
+        border: 2px solid white;
+        border-radius: 10px;
+      }
+    }
   }
 }
 
